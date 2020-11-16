@@ -13,6 +13,8 @@
 # Assocations
 # --------------------
 # Belongs to a Catagory
+# Has Many OrderedItems
+# Has Many Orders via OrderedItems
 #
 #======================
 
@@ -22,5 +24,8 @@ class Product < ApplicationRecord
   vaidates :stock, numericality: [only_integer: true]
 
   belongs_to :catagory
+  has_many :ordered_items
+  has_many :orders, through: :ordered_items
+
   has_one_attached :image
 end

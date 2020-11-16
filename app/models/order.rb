@@ -12,6 +12,8 @@
 # --------------------
 # Belongs to a User
 # Has One Address
+# Has Many OrderedItems
+# Has Many Products via OrderedItems
 #
 #======================
 
@@ -21,4 +23,6 @@ class Order < ApplicationRecord
 
   has_one :address
   belongs_to :user
+  has_many :ordered_items
+  has_many :products, through: :ordered_items
 end
