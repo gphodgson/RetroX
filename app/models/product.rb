@@ -12,7 +12,7 @@
 #
 # Assocations
 # --------------------
-# Has One Catagory
+# Belongs to a Catagory
 #
 #======================
 
