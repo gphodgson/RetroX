@@ -9,8 +9,10 @@
 #
 # Assocations
 # --------------------
+# Has Many Products
 #
 #======================
 class Catagory < ApplicationRecord
   validates :name, presence: true
+  has_many :products
 end
