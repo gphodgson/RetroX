@@ -22,5 +22,5 @@ class Address < ApplicationRecord
   validates :line1, :city, :state, :country, :phone, :postalCode, presence: true
   validates :state, inclusion: { in: ["AB", "BC", "MB", "NB", "NL", "NS", "ON", "PE", "QC", "SK"] }
 
-  has_one :user
+  belongs_to :user, optional: true
 end
