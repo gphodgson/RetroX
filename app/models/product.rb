@@ -19,7 +19,7 @@
 #======================
 
 class Product < ApplicationRecord
-  vaildates :name, :price, :stock, presence: true
+  validates :name, :price, :stock, presence: true
   validates :price, numericality: true
   validates :stock, numericality: [only_integer: true]
 
