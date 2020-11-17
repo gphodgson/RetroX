@@ -1,5 +1,5 @@
 ActiveAdmin.register Product do
-  permit_params :name, :price, :stock, :catagory_id, :image
+  permit_params :name, :price, :stock, :catagory_id, :description, :image
 
   form do |f|
     f.semantic_errors # shows errors on :base

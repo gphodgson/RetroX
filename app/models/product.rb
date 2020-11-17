@@ -5,10 +5,11 @@
 #
 # Feilds
 # --------------------------
-# Name    | String      | Required
-# Price   | Decimal     | Requried, Numeric
-# Stock   | Integer     | Requried, Numeric, Integer
-# Image   | Attachment  | Optional
+# Name        | String      | Required
+# Price       | Decimal     | Requried, Numeric
+# Stock       | Integer     | Requried, Numeric, Integer
+# Image       | Attachment  | Optional
+# Description | Text | Optional
 #
 # Assocations
 # --------------------
