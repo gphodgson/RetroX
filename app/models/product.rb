@@ -5,10 +5,11 @@
 #
 # Feilds
 # --------------------------
-# Name    | String      | Required
-# Price   | Decimal     | Requried, Numeric
-# Stock   | Integer     | Requried, Numeric, Integer
-# Image   | Attachment  | Optional
+# Name        | String      | Required
+# Price       | Decimal     | Requried, Numeric
+# Stock       | Integer     | Requried, Numeric, Integer
+# Image       | Attachment  | Optional
+# Description | Text | Optional
 #
 # Assocations
 # --------------------
@@ -19,9 +20,9 @@
 #======================
 
 class Product < ApplicationRecord
-  vaildates :name, :price, :stock, presence: true
+  validates :name, :price, :stock, presence: true
   validates :price, numericality: true
-  vaidates :stock, numericality: [only_integer: true]
+  validates :stock, numericality: [only_integer: true]
 
   belongs_to :catagory
   has_many :ordered_items
