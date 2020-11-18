@@ -1,8 +1,8 @@
 <h2 class="subtitle">Newly Added Titles:</h2>
 
 <div class="columns is-fullwidth">
-<%= render partial: "common/product_card",
-          collection: @products,
-          as: :product,
-          locals: {show_link: false}%>
+  <%= render partial: "common/product_card",
+            collection: @products,
+            as: :product,
+            locals: {size: "is-one-fifth"}%>
 </div>
