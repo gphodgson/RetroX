@@ -14,7 +14,19 @@
   <body>
     <section class="section">
       <div class="container">
-        <h1 class="title is-1">OHG</h1>
+
+        <nav class="navbar" role="navigation" aria-label="main navigaion">
+          <div class="navbar-brand">
+            <h1 class="title is-2">OHG</h1>
+          </div>
+
+          <div class="navbar-menu">
+            <a href="/products" class="navbar-item">
+              Products
+            </a>
+          </div>
+        </nav>
+
         <%= yield %>
       </div>
     </section>
