@@ -20,6 +20,12 @@
 #======================
 
 class Product < ApplicationRecord
+  NEW_PRODUCT_THRESHOLD = 3
+
+  def self.new_products
+    Product.where("created_at - CURRENT_DATE <= #{NEW_PRODUCT_THRESHOLD}")
+  end
+
   validates :name, :price, :stock, presence: true
   validates :price, numericality: true
   validates :stock, numericality: [only_integer: true]
