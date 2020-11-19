@@ -2,8 +2,26 @@
 
 <div class="columns">
   <div class="column is-one-fifth mr-5" style="border-right: 1px gray dashed">
-    <form action="aa">
-      <input type="text">
+
+    <form action="<%= products_path %>" method="get">
+      <p>
+        <label for="searcg">Search: </label>
+        <input type="text" name="query" id="query">
+      </p>
+      <p>
+        <label for="console">Console: </label>
+        <%= select_tag :console_id, options_from_collection_for_select(@catagories, :id, :name), include_blank: true %>
+      </p>
+      <p>
+        <label for="filter">Filter By: </label>
+        <%= select_tag :filter_id, options_for_select([
+          ["New", 1],
+          ["Recently Updated", 2]
+        ]), include_blank: true%>
+      </p>
+      <p>
+        <input type="submit" value="Filter">
+      </p>
     </form>
   </div>
 
