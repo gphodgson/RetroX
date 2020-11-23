@@ -1,8 +1,26 @@
+<section class="hero is-info mb-5">
+  <div class="hero-body">
+    <div class=container>
+      <h1 class="title is-3"><%= @product.name %></h1>
+      <h1 class="subtitle is-italic"><%= @product.catagory.name %> | $<%= @product.price %> CAD</h1>
+    </div>
+  </div>
+</section>
+
 <div class="columns">
-  <div class="column is-one-third">
-    <h1 class="title is-3"><%= @product.name %></h1>
-    <h1 class="subtitle is-italic"><%= @product.catagory.name %> | $<%= @product.price %> CAD</h1>
-    <%= image_tag @product.image%>
+  <div class="column is-one-third mr-5" style="border-right: 1px dashed grey">
+
+    <div class="container is-flex mb-5" style="justify-content:center">
+      <%= image_tag @product.image%>
+    </div>
+
+    <div class="container is-flex" style="justify-content:center">
+      <div class=is-flex style="justify-content:center; align-items:center">
+        <button class="button is-success mr-5">Add to Cart</button>
+        <p class=is-italic>$<%= @product.price %> CAD | <%= @product.stock%> left.</p>
+      </div>
+    </div>
+
   </div>
 
   <div class="column">

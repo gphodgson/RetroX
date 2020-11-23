@@ -9,7 +9,7 @@
 # Price       | Decimal     | Requried, Numeric
 # Stock       | Integer     | Requried, Numeric, Integer
 # Image       | Attachment  | Optional
-# Description | Text | Optional
+# Description | Text        | Optional
 #
 # Assocations
 # --------------------
@@ -36,7 +36,7 @@ class Product < ApplicationRecord
   end
 
   def self.recently_updated_products_query
-    "julianday('now') - julianday(created_at) <= #{RECENT_UPDATE_THRESHOLD} AND !(#{new_products_query})"
+    "julianday('now') - julianday(created_at) <= #{RECENT_UPDATE_THRESHOLD} AND NOT (#{new_products_query})"
   end
 
   validates :name, :price, :stock, presence: true

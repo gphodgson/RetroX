@@ -10,9 +10,9 @@ class ProductsController < ApplicationController
 
     if params[:filter_id].present?
       filter_id = params[:filter_id]
-      if filter_id == 1
+      if filter_id == "1"
         @products = @products.where(Product.new_products_query)
-      elsif filter_id == 2
+      elsif filter_id == "2"
         @products = @products.where(Product.recently_updated_products_query)
       end
     end
