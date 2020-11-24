@@ -15,7 +15,7 @@
     <section class="section">
       <div class="container">
 
-        <nav class="navbar" role="navigation" aria-label="main navigaion">
+        <nav class="navbar mb-5" role="navigation" aria-label="main navigaion" style="border-bottom: 1px solid grey">
           <div class="navbar-brand">
             <a href="/">
               <h1 class="title is-2">OHG</h1>
@@ -23,14 +23,33 @@
           </div>
 
           <div class="navbar-menu">
-            <a href="/products" class="navbar-item">
-              Products
-            </a>
+            <div class="navbar-item has-dropdown is-hoverable">
+              <a class="navbar-link" href="/products">
+                Games
+              </a>
+
+              <div class="navbar-dropdown">
+                <%Catagory.all.each do |cat|%>
+                  <a class=navbar-item href="/products?console_id=<%= cat.id %>">
+                    <%= cat.name %> Games
+                  </a>
+                <%end%>
+              </div>
+            </div>
           </div>
+
         </nav>
 
         <%= yield %>
       </div>
     </section>
+    <script>
+      var dropdown = document.querySelector('.navbar-dropdown');
+      dropdown.addEventListener('click', function(event) {
+        event.stopPropagation();
+        dropdown.classList.toggle('is-active');
+      });
+    </script>
+
   </body>
 </html>
