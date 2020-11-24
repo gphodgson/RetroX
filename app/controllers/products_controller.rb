@@ -8,6 +8,12 @@ class ProductsController < ApplicationController
       @products = catagory.products
     end
 
+    @page = 1
+
+    @page = params[:page].to_i if params[:page].present?
+
+    @products = @products.page(@page)
+
     if params[:filter_id].present?
       filter_id = params[:filter_id]
       if filter_id == "1"

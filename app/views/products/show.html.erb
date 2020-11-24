@@ -11,7 +11,7 @@
   <div class="column is-one-third mr-5" style="border-right: 1px dashed grey">
 
     <div class="container is-flex mb-5" style="justify-content:center">
-      <%= image_tag @product.image%>
+      <%= image_tag @product.image.variant(resize: "1024x800!").processed%>
     </div>
 
     <div class="container is-flex" style="justify-content:center">

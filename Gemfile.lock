@@ -273,6 +273,7 @@ DEPENDENCIES
   devise
   image_processing
   jbuilder (~> 2.7)
+  kaminari
   listen (~> 3.2)
   puma (~> 4.1)
   rails (~> 6.0.3, >= 6.0.3.4)
