@@ -1,0 +1,14 @@
+<div class="column <%= size %>">
+  <a href="/products/<%= product.id  %>">
+  <div class="card">
+    <div class="card-image is-flex" style="justify-content:center">
+      <%= image_tag product.image.variant(resize: "200x300!").processed %>
+    </div>
+    <div class="card-content">
+      <div class="container is-flex" style="justify-content:center">
+        <p class="subtitle is-5" style="white-space:nowrap;"><%= product.name %></p>
+      </div>
+    </div>
+  </div>
+</div>
+</a>
