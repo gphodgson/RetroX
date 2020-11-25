@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :products, only: [:index, :show]
+  resources :sessions, only: %i[new create destroy]
+  get "logout", to: "sessions#destroy", as: "logout"
+
+  resources :users, only: %i[show new create]
+  resources :products, only: %i[index show]
   root to: "home#index"
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
