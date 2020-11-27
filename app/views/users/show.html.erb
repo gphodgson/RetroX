@@ -6,9 +6,16 @@
     </div>
   </div>
 </section>
-<div class="is-flex pb-5" style="justify-content:space-between; border-bottom: 1px dashed grey;">
+<div class="is-flex pb-5 mb-5" style="justify-content:space-between; border-bottom: 1px dashed grey;">
   <h1 class=button style="border:none" style="border: 1px solid black">Saved Addresses: </h1>
-  <a class="button is-primary" href="">
+  <a class="button is-primary" href="<%= root_url %>addresses/new">
     Add Address
   </a>
 </div>
+
+<div>
+    <%= render partial: "common/address",
+                collection: @user.addresses,
+                as: :address,
+                locals: {size: "is-one-quarter"}%>
+  </div>
