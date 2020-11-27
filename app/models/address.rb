@@ -19,6 +19,10 @@
 #
 #======================
 class Address < ApplicationRecord
+  def address_string
+    "#{line1}, #{line2}, #{city}, #{state}, #{country}, #{postalCode}"
+  end
+
   validates :line1, :city, :state, :country, :phone, :postalCode, presence: true
   validates :state, inclusion: { in: ["AB", "BC", "MB", "NB", "NL", "NS", "ON", "PE", "QC", "SK"] }
 
