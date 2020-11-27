@@ -38,6 +38,29 @@
             </div>
           </div>
 
+          <div class="navbar-end">
+            <div class="navbar-item">
+              <div class="buttons">
+                <%if !logged_in?%>
+                  <a class="button is-primary" href="<%= new_user_path %>">
+                    <strong>Sign up</strong>
+                  </a>
+                  <a class="button is-light" href="<%= new_session_path %>">
+                    Log in
+                  </a>
+                <%else%>
+                  <a class="button is-success" href="<%=root_url%>users/<%= current_user.id %>">
+                    <%= current_user.name %>
+                  </a>
+
+                  <a class="button is-danger" href="/logout">
+                    Log out
+                  </a>
+                <%end%>
+              </div>
+            </div>
+          </div>
+
         </nav>
 
         <%= yield %>
