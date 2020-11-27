@@ -1,0 +1,14 @@
+<section class="hero is-info mb-5">
+  <div class="hero-body">
+    <div class=container>
+      <h1 class="title is-3"><%= @catagory.name%> Games</h1>
+    </div>
+  </div>
+</section>
+
+<div class="columns is-multiline">
+  <%= render partial: "common/product_card",
+          collection: @catagory.products,
+          as: :product,
+          locals: {size: "is-one-fifth"}%>
+</div>
