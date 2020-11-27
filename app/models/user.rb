@@ -6,6 +6,7 @@
 # Feilds
 # --------------------------
 # Name  | String  | Required
+# Pass  | String  | Requried
 #
 # Assocations
 # --------------------
@@ -17,7 +18,5 @@ class User < ApplicationRecord
   has_many :addresses
   has_many :orders
 
-  validates :name, presence: true
-
-  has_secure_password
+  validates :name, :pass, presence: true
 end

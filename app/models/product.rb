@@ -39,14 +39,6 @@ class Product < ApplicationRecord
     "julianday('now') - julianday(created_at) <= #{RECENT_UPDATE_THRESHOLD} AND NOT (#{new_products_query})"
   end
 
-  def self.generate_filter_url(params)
-    "/products?query=#{params[:query] || ''}&console_id=#{params[:console_id] || ''}&filter_id=#{params[:filter_id] || ''}&page=#{params[:page] || ''}"
-  end
-
-  def self.generate_paged_filter_url(params, page)
-    "/products?query=#{params[:query] || ''}&console_id=#{params[:console_id] || ''}&filter_id=#{params[:filter_id] || ''}&page=#{page}"
-  end
-
   validates :name, :price, :stock, presence: true
   validates :price, numericality: true
   validates :stock, numericality: [only_integer: true]
@@ -56,6 +48,4 @@ class Product < ApplicationRecord
   has_many :orders, through: :ordered_items
 
   has_one_attached :image
-
-  max_paginates_per 8
 end

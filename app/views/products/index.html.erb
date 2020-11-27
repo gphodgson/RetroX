@@ -38,31 +38,5 @@
               as: :product,
               locals: {size: "is-one-quarter"}%>
     </div>
-
-    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
-      <%if @page != 1 %>
-        <a class="pagination-previous" href="<%= Product.generate_paged_filter_url(params, @page-1)%>">Previous</a>
-      <%end%>
-
-      <%if @page != @products.total_pages %>
-        <a class="pagination-next" href="<%= Product.generate_paged_filter_url(params, @page+1)%>">Next page</a>
-      <%end%>
-
-      <ul class="pagination-list">
-        <%if @page != 1 %>
-          <li><a class="pagination-link" aria-label="Goto page 1" href="<%= Product.generate_paged_filter_url(params, 1)%>">1</a></li>
-          <li><span class="pagination-ellipsis">&hellip;</span></li>
-          <li><a class="pagination-link" aria-label="Goto page <%= @page-1 %>"  href="<%= Product.generate_paged_filter_url(params, @page-1)%>"><%= @page-1 %></a></li>
-        <%end%>
-
-        <li><a class="pagination-link is-current" aria-label="Page <%= @page %>"  aria-current="page"><%= @page %></a></li>
-
-        <%if @page != @products.total_pages %>
-          <li><a class="pagination-link" aria-label="Goto page <%= @page+1 %>" href="<%= Product.generate_paged_filter_url(params, @page+1)%>"><%= @page+1 %></a></li>
-          <li><span class="pagination-ellipsis">&hellip;</span></li>
-          <li><a class="pagination-link" aria-label="Goto page <%= @products.total_pages %>" href="<%= Product.generate_paged_filter_url(params, @products.total_pages)%>"><%= @products.total_pages %></a></li>
-        <%end%>
-      </ul>
-    </nav>
   </div>
 </div>
