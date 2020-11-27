@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :catagories, only: [:show]
   resources :addresses, only: %i[new create]
 
   resources :sessions, only: %i[new create destroy]

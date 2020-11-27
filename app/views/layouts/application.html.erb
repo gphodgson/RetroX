@@ -29,8 +29,11 @@
               </a>
 
               <div class="navbar-dropdown">
+                <a href="/products"  class="navbar-item">
+                  All Games
+                </a>
                 <%Catagory.all.each do |cat|%>
-                  <a class=navbar-item href="/products?console_id=<%= cat.id %>">
+                  <a class=navbar-item href="/catagories/<%= cat.id %>">
                     <%= cat.name %> Games
                   </a>
                 <%end%>
