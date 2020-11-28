@@ -47,6 +47,49 @@ class Product < ApplicationRecord
     "/products?query=#{params[:query] || ''}&console_id=#{params[:console_id] || ''}&filter_id=#{params[:filter_id] || ''}&page=#{page}"
   end
 
+  def self.get_filtered_products(params)
+    products = Product.all
+
+    products = filter_all_products_by_catagory(products, params[:console_id])
+
+    page = 1
+    page = params[:page].to_i if params[:page].present?
+    products = get_product_page(products, page)
+
+    products = filter_products(products, params[:filter_id])
+
+    if params[:query].present?
+      products = products.where("name LIKE :query", query: "%#{params[:query]}%")
+    end
+
+    products
+  end
+
+  def self.filter_products(products, filter_id)
+    if filter_id.present?
+      if filter_id == "1" # Filter by new Products.
+        products = products.where(Product.new_products_query)
+      elsif filter_id == "2" # Filter by Recently updated products.
+        products = products.where(Product.recently_updated_products_query)
+      end
+    end
+
+    products
+  end
+
+  def self.filter_all_products_by_catagory(products, catagory_id)
+    if catagory_id.present?
+      catagory = Catagory.find(catagory_id)
+      products = catagory.products
+    end
+    products
+  end
+
+  def self.get_product_page(products, page)
+    products = products.page(page)
+    products
+  end
+
   validates :name, :price, :stock, presence: true
   validates :price, numericality: true
   validates :stock, numericality: [only_integer: true]
