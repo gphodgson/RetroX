@@ -11,6 +11,6 @@ class AddressesController < ApplicationController
                                                                              :country,
                                                                              :phone,
                                                                              :postalCode))
-    redirect_to user_path + current_user.id
+    redirect_to user_path(current_user.id)
   end
 end
