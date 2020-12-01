@@ -47,6 +47,16 @@ class Product < ApplicationRecord
     "/products?query=#{params[:query] || ''}&console_id=#{params[:console_id] || ''}&filter_id=#{params[:filter_id] || ''}&page=#{page}"
   end
 
+  def self.sort_by(products, sort_id, dir)
+    if sort_id.present?
+      products.order("price #{dir}") if sort_id == 1
+      products.order("stock #{dir}") if sort_id == 2
+      products.order("name #{dir}") if sort_id == 3
+    end
+
+    products
+  end
+
   def self.get_filtered_products(params)
     products = Product.all
 
@@ -61,6 +71,8 @@ class Product < ApplicationRecord
     if params[:query].present?
       products = products.where("name LIKE :query", query: "%#{params[:query]}%")
     end
+
+    products = sort_by(products, params[:sort_by], params[:sort_dir])
 
     products
   end
