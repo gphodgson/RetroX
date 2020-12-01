@@ -21,9 +21,21 @@
       <p>
         <label for="filter">Filter By: </label>
         <%= select_tag :filter_id, options_for_select([
-          ["New", 1],
-          ["Recently Updated", 2]
+          ["New", Product::NEW_ID],
+          ["Recently Updated", Product::RECENTLY_UPDATED_ID]
         ]), include_blank: true%>
+      </p>
+      <p>
+        <label for="sort_by">Sort By: </label>
+        <%= select_tag :sort_id, options_for_select([
+          ["Price", 1],
+          ["Stock", 2],
+          ["Name",  3]
+        ]), include_blank: true%>
+        <%= select_tag :sort_dir, options_for_select([
+          ["▼", 0],
+          ["▲", 1]
+        ])%>
       </p>
       <p>
         <input type="submit" value="Filter">
