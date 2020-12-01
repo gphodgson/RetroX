@@ -1,8 +1,54 @@
-<h2 class="subtitle">Newly Added Titles:</h2>
+<section class="hero is-info mb-5">
+  <div class="hero-body">
+    <div class=container>
+      <h1 class="title is-3">Newly Added Games:</h1>
+    </div>
+  </div>
+</section>
 
 <div class="columns is-fullwidth">
   <%= render partial: "common/product_card",
-            collection: @products,
+            collection: @new_products,
             as: :product,
             locals: {size: "is-one-fifth"}%>
+</div>
+
+<section class="hero is-info mb-5">
+  <div class="hero-body">
+    <div class=container>
+      <h1 class="title is-3">Rare Games:</h1>
+    </div>
+  </div>
+</section>
+
+<div class="columns is-fullwidth">
+  <%= render partial: "common/product_card",
+            collection: @rare_games,
+            as: :product,
+            locals: {size: "is-one-fifth"}%>
+  <div class=column>
+    <a href="<%=products_path%>" class="button is-primary">
+      See all Rare Games -->
+    </a>
+  </div>
+</div>
+
+<section class="hero is-info mb-5">
+  <div class="hero-body">
+    <div class=container>
+      <h1 class="title is-3">Expensive Games:</h1>
+    </div>
+  </div>
+</section>
+
+<div class="columns is-fullwidth">
+  <%= render partial: "common/product_card",
+            collection: @expensive_games,
+            as: :product,
+            locals: {size: "is-one-fifth"}%>
+  <div class=column>
+    <a href="" class="button is-primary">
+      See all Expensive Games -->
+    </a>
+  </div>
 </div>

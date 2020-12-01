@@ -67,15 +67,14 @@
         </nav>
 
         <%= yield %>
+        <footer class=footer>
+        <div class="content has-text-centered border-top pt-5">
+          Geoffrey Hodgson -- Dec 2020 | <a href="https://github.com/payne1134">Github</a> | About | Contact
+        </div>
+      </footer>
       </div>
+
     </section>
-    <script>
-      var dropdown = document.querySelector('.navbar-dropdown');
-      dropdown.addEventListener('click', function(event) {
-        event.stopPropagation();
-        dropdown.classList.toggle('is-active');
-      });
-    </script>
 
   </body>
 </html>
