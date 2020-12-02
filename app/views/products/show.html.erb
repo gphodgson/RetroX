@@ -16,7 +16,11 @@
 
     <div class="container is-flex" style="justify-content:center">
       <div class=is-flex style="justify-content:center; align-items:center">
-        <button class="button is-success mr-5">Add to Cart</button>
+
+        <%=form_with url: cart_create_path do%>
+          <%= hidden_field_tag :id, @product.id %>
+          <%= button_tag 'Add to Cart', class: "button is-success mr-5" %>
+        <%end%>
         <p class=is-italic>$<%= @product.price %> CAD | <%= @product.stock%> left.</p>
       </div>
     </div>

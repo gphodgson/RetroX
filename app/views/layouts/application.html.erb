@@ -43,6 +43,25 @@
 
           <div class="navbar-end">
             <div class="navbar-item">
+              <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link" href="/products">
+                  Cart (<%= cart["amount"] %>)
+                </a>
+
+                <div class="navbar-dropdown">
+                  <%cart["items"].each do |item|%>
+                    <a class=navbar-item href="/products">
+                      <%=item["name"]%> | <%= number_to_currency item["price"]%> x <%= item["amount"]%>
+                    </a>
+
+                  <%end%>
+
+                  <a href="/products"  class="navbar-item">
+                    Goto Checkout -->
+                  </a>
+                </div>
+            </div>
+
               <div class="buttons">
                 <%if !logged_in?%>
                   <a class="button is-primary" href="<%= new_user_path %>">

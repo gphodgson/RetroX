@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  # resources :cart, only: %i[create destroy]
+
+  post "cart/:id", to: "cart#create", as: "cart_create"
+
   resources :catagories, only: [:show]
   resources :addresses, only: %i[new create]
 
