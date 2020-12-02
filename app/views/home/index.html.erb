@@ -27,7 +27,7 @@
             as: :product,
             locals: {size: "is-one-fifth"}%>
   <div class=column>
-    <a href="<%=products_path%>" class="button is-primary">
+    <a href="<%=products_path%>?sort_id=<%=Product::STOCK_ID%>&sort_dir=0" class="button is-primary">
       See all Rare Games -->
     </a>
   </div>
@@ -47,7 +47,7 @@
             as: :product,
             locals: {size: "is-one-fifth"}%>
   <div class=column>
-    <a href="" class="button is-primary">
+    <a href="<%=products_path%>?sort_id=<%=Product::PRICE_ID%>&sort_dir=0" class="button is-primary">
       See all Expensive Games -->
     </a>
   </div>
