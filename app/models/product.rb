@@ -23,6 +23,13 @@ class Product < ApplicationRecord
   NEW_PRODUCT_THRESHOLD = 3
   RECENT_UPDATE_THRESHOLD = 3
 
+  NEW_ID = "1".freeze
+  RECENTLY_UPDATED_ID = "2".freeze
+
+  PRICE_ID = "1".freeze
+  STOCK_ID = "2".freeze
+  NAME_ID =  "3".freeze
+
   def self.new_products
     Product.where(new_products_query)
   end
@@ -47,6 +54,17 @@ class Product < ApplicationRecord
     "/products?query=#{params[:query] || ''}&console_id=#{params[:console_id] || ''}&filter_id=#{params[:filter_id] || ''}&page=#{page}"
   end
 
+  def self.sort_by(products, sort_id, dir)
+    if sort_id.present?
+      sort_dir = dir == "0" ? "DESC" : "ASC"
+      products = products.order("price #{sort_dir}") if sort_id == PRICE_ID # Sort by Price
+      products = products.order("stock #{sort_dir}") if sort_id == STOCK_ID # Sort by Stock
+      products = products.order("name #{sort_dir}") if sort_id == NAME_ID   # Sort by Name
+    end
+
+    products
+  end
+
   def self.get_filtered_products(params)
     products = Product.all
 
@@ -62,14 +80,16 @@ class Product < ApplicationRecord
       products = products.where("name LIKE :query", query: "%#{params[:query]}%")
     end
 
+    products = sort_by(products, params[:sort_id], params[:sort_dir])
+
     products
   end
 
   def self.filter_products(products, filter_id)
     if filter_id.present?
-      if filter_id == "1" # Filter by new Products.
+      if filter_id == NEW_ID # Filter by new Products.
         products = products.where(Product.new_products_query)
-      elsif filter_id == "2" # Filter by Recently updated products.
+      elsif filter_id == RECENTLY_UPDATED_ID # Filter by Recently updated products.
         products = products.where(Product.recently_updated_products_query)
       end
     end

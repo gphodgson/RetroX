@@ -13,3 +13,8 @@
  *= require_tree .
  *= require_self
  */
+
+
+ .border-top{
+   border-top: 1px dashed grey
+ }
