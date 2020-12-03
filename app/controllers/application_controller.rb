@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   before_action :init_session
   helper_method :cart
+  helper_method :cart_subtotal
 
   private
 
@@ -25,5 +26,14 @@ class ApplicationController < ActionController::Base
 
   def logged_in?
     !current_user.nil?
+  end
+
+  def cart_subtotal
+    subtotal = 0
+    cart["items"].each do |item|
+      subtotal += item["price"].to_i * item["amount"].to_i
+    end
+
+    subtotal
   end
 end
