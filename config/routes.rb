@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  # get "checkout", to: "checkout#index", as: "checkout"
+
+  post "cart/:id", to: "cart#create", as: "cart_create"
+  post "cart/delete/:id", to: "cart#destroy", as: "cart_delete"
+  post "cart/update/:id", to: "cart#update", as: "cart_update"
+
   resources :catagories, only: [:show]
   resources :addresses, only: %i[new create]
 
@@ -8,6 +14,7 @@ Rails.application.routes.draw do
   resources :users, only: %i[show new create]
 
   resources :products, only: %i[index show]
+  resources :checkout, only: [:index]
 
   root to: "home#index"
   devise_for :admin_users, ActiveAdmin::Devise.config
