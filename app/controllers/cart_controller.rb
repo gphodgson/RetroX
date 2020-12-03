@@ -3,22 +3,59 @@ class CartController < ApplicationController
     product_id = params[:id]
     product = Product.find(product_id)
 
-    unless edit_cart_item(product.name)
-      add_to_card(product)
-    end
+    add_to_cart(product) unless edit_cart_item(product.name)
 
     redirect_to product_path(product_id)
   end
 
-  def destroy; end
+  def destroy
+    index_to_remove = nil
+    cart["items"].each_with_index do |item, i|
+      index_to_remove = i if item["id"].to_s == params[:id].to_s
+    end
 
-  def add_to_card(product)
+    if index_to_remove.present?
+      cart["items"].delete_at(index_to_remove)
+      cart["amount"] -= 1
+    end
+
+    redirect_to checkout_index_path
+  end
+
+  def update
+    product_id = params[:id]
+    add = params[:add]
+
+    cart["items"].each do |item|
+      next unless item["id"].to_s == product_id.to_s
+
+      if add == "true"
+        item["amount"] += 1
+      else
+        if item["amount"] <= 1
+          destroy
+          return
+        else
+          item["amount"] -= 1
+        end
+      end
+
+      break
+    end
+
+    redirect_to checkout_index_path
+  end
+
+  private
+
+  def add_to_cart(product)
     session["cart"]["items"].push({
-      "name":   product.name,
-      "price":  product.price,
-      "amount": 1
-    })
-  session["cart"]["amount"] += 1
+                                    "name":   product.name,
+                                    "price":  product.price,
+                                    "id":     product.id,
+                                    "amount": 1
+                                  })
+    session["cart"]["amount"] += 1
   end
 
   def edit_cart_item(product_name)

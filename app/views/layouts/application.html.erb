@@ -44,19 +44,19 @@
           <div class="navbar-end">
             <div class="navbar-item">
               <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link" href="/products">
+                <a class="navbar-link" href="/checkout">
                   Cart (<%= cart["amount"] %>)
                 </a>
 
                 <div class="navbar-dropdown">
                   <%cart["items"].each do |item|%>
-                    <a class=navbar-item href="/products">
+                    <a class=navbar-item href="<%=product_path(item["id"])%>">
                       <%=item["name"]%> | <%= number_to_currency item["price"]%> x <%= item["amount"]%>
                     </a>
 
                   <%end%>
 
-                  <a href="/products"  class="navbar-item">
+                  <a href="/checkout"  class="navbar-item">
                     Goto Checkout -->
                   </a>
                 </div>

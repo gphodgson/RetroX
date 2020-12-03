@@ -1,0 +1,61 @@
+<section class="hero is-info mb-5">
+  <div class="hero-body">
+    <div class=container>
+      <h1 class="title is-3">Checkout</h1>
+      <h1 class="subtitle"><%=pluralize cart["amount"], "Game"%></h1>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+
+  <%@items.each do |item|%>
+      <div class="columns pb-5 mt-5 mb-5 border-bottom">
+        <div class=column>
+          <p class=""><%= item[:product].name %> x
+            <%=item[:item]["amount"]%>
+            | <%= number_to_currency item[:product].price * item[:item]["amount"]%> total.</p>
+        </div>
+        <div class="column is-1" style="direction:rtl">
+          <div class="columns">
+            <div class="column">
+                <%=form_with url: cart_delete_path(item[:product].id) do%>
+                  <%= hidden_field_tag :id, item[:product].id %>
+                  <%= button_tag 'x', class: "button is-danger mr-5" %>
+                <%end%>
+            </div>
+
+            <div class="column">
+              <%=form_with url: cart_update_path(item[:product].id) do%>
+                <%= hidden_field_tag :id, item[:product].id %>
+                <%= hidden_field_tag :add, true %>
+                <%= button_tag '▲', class: "button is-warning mr-5" %>
+              <%end%>
+            </div>
+
+            <div class=column>
+              <%=form_with url: cart_update_path(item[:product].id) do%>
+                <%= hidden_field_tag :id, item[:product].id %>
+                <%= hidden_field_tag :add, false %>
+                <%= button_tag '▼', class: "button is-warning mr-5" %>
+              <%end%>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+
+
+  <%end%>
+  <div class="columns  mb-5">
+    <div class="column">
+      <h1 class="subtitle"> SubTotal: </h1>
+    </div>
+    <div>
+      <a href="" class="button is-success"> Place Order</a>
+    </div>
+  </div>
+
+</div>
