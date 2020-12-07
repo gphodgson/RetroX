@@ -18,6 +18,16 @@
 #======================
 
 class Order < ApplicationRecord
+  NEW = "new".freeze
+  PROCESSING = "processing".freeze
+  SHIPPED = "shipped".freeze
+  DELIVERED = "delivered".freeze
+  CANCELLED = "cancelled".freeze
+
+  def item_string
+    "#{products.first.name}, and more..."
+  end
+
   validates :total_price, :state, presence: true
   validates :total_price, numericality: true
 

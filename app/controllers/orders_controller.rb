@@ -24,11 +24,13 @@ class OrdersController < ApplicationController
     end
 
     new_order = Order.create(total_price: 0,
-                             state:       "new",
+                             state:       Order::NEW,
                              address:     address,
                              user:        logged_in? ? current_user : User.find_by(name: "guest"))
 
     logger.debug(new_order.errors.messages) unless new_order.valid?
+
+    total = 0
 
     cart["items"].each do |item|
       product = Product.find(item["id"])
@@ -36,13 +38,23 @@ class OrdersController < ApplicationController
       item = new_order.ordered_items.create(amount:  item["amount"],
                                             price:   product.price,
                                             product: product)
+      total += item["amount"] * product.price
       logger.debug(item.errors.messages) unless item.valid?
     end
+    new_order.total_price = total
+    new_order.save
 
     redirect_to order_path(new_order.id)
   end
 
   def show
     @order = Order.find(params[:id])
+  end
+
+  def destroy
+    order = Order.find(params[:id])
+    order.state = Order::CANCELLED
+    order.save
+    redirect_to user_path(current_user.id)
   end
 end

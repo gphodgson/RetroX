@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post "order/destroy/:id", to: "orders#destroy", as: "order_delete"
   resources :orders, only: %i[show new create]
   # get "checkout", to: "checkout#index", as: "checkout"
 
