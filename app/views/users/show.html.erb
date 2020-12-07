@@ -6,6 +6,34 @@
     </div>
   </div>
 </section>
+
+<div class="is-flex pb-5 mb-5" style="justify-content:space-between; border-bottom: 1px dashed grey;">
+  <h1 class=button style="border:none" style="border: 1px solid black">My Orders: </h1>
+</div>
+
+<div class="mb-5">
+  <table class="table is-fullwidth">
+    <thead>
+      <th>Items</th>
+      <th>Status</th>
+      <th>Subtotal</th>
+      <th>Date</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <% @user.orders.each do |order|%>
+        <tr>
+          <td><%= order.item_string%></td>
+          <td><%= order.state%></td>
+          <td><%= order.total_price%></td>
+          <td><%= order.created_at%></td>
+          <td><a href="<%= order_path order.id %>" class="button is-success">Details</a></td>
+        </tr>
+      <%end%>
+    </tbody>
+  </table>
+</div>
+
 <div class="is-flex pb-5 mb-5" style="justify-content:space-between; border-bottom: 1px dashed grey;">
   <h1 class=button style="border:none" style="border: 1px solid black">Saved Addresses: </h1>
   <a class="button is-primary" href="<%= root_url %>addresses/new">
@@ -15,7 +43,7 @@
 
 <div>
     <%= render partial: "common/address",
-                collection: @user.addresses,
-                as: :address,
-                locals: {size: "is-one-quarter"}%>
-  </div>
+    collection: @user.addresses,
+    as: :address,
+    locals: {size: "is-one-quarter"}%>
+</div>

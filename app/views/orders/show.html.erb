@@ -1,0 +1,122 @@
+<section class="hero is-info mb-5">
+  <div class="hero-body">
+    <div class=container>
+      <h1 class="title is-3">My Order</h1>
+      <h1 class=subtitle>Order Status: <%=@order.state%></h1>
+    </div>
+  </div>
+</section>
+
+<table class="table is-fullwidth">
+  <thead>
+    <th></th>
+    <th>Title</th>
+    <th>Amount</th>
+    <th>Price</th>
+    <th>Total Price</th>
+  </thead>
+  <tbody>
+    <%@order.ordered_items.each do |item|%>
+      <tr>
+        <td><%= image_tag item.product.image.variant(resize: "100x150!").processed %></td>
+        <td><%= item.product.name%></td>
+        <td><%= item.amount%></td>
+        <td><%= number_to_currency item.price%></td>
+        <td><%= number_to_currency item.price * item.amount%></td>
+      </tr>
+    <%end%>
+  </tbody>
+</table>
+
+<table class="table is-fullwidth">
+  <thead>
+    <th>Sub-Total</th>
+    <th>GST</th>
+    <th>PST</th>
+    <th>Grand Total</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= number_to_currency @order.total_price %></td>
+      <td><%= number_to_currency @order.pst %></td>
+      <td><%= number_to_currency @order.gst %></td>
+      <td><%= number_to_currency @order.total_taxed_price %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%if @order.state == Order::NEW%>
+
+  <section class="hero is-info mb-5">
+    <div class="hero-body">
+      <div class=container>
+        <div class="is-flex" style="justify-content: space-between">
+          <h1 class="title is-3">Pay for Order</h1>
+          <%=form_with url: order_delete_path(@order.id) do%>
+            <%= hidden_field_tag :id, @order.id %>
+            <%= button_tag 'Cancel Order', class: "button is-danger mr-5" %>
+          <%end%>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%=form_with url: payment_create_path do%>
+    <%= hidden_field_tag :id, @order.id %>
+    <%= button_tag 'Pay With Stripe 💳', class: "button is-info mr-5" %>
+  <%end%>
+
+<%elsif @order.state == Order::PROCESSING%>
+
+  <section class="hero is-info mb-5">
+    <div class="hero-body">
+      <div class=container>
+        <div class="is-flex" style="justify-content: space-between">
+          <h1 class="title is-3">Your Order is Being Processed...</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<%elsif @order.state == Order::SHIPPED%>
+
+  <section class="hero is-info mb-5">
+    <div class="hero-body">
+      <div class=container>
+        <div class="is-flex" style="justify-content: space-between">
+          <h1 class="title is-3">Your Order is On Its Way!</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<%elsif @order.state == Order::DELIVERED%>
+
+  <section class="hero is-info mb-5">
+    <div class="hero-body">
+      <div class=container>
+        <div class="is-flex" style="justify-content: space-between">
+          <h1 class="title is-3">Your Order is On Its Way!</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<%elsif @order.state == Order::CANCELLED%>
+
+  <section class="hero is-info mb-5">
+    <div class="hero-body">
+      <div class=container>
+        <div class="is-flex" style="justify-content: space-between">
+          <h1 class="title is-3">This Order was</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<%end%>
+
+
+
+
+

@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  post "payment/create", to: "payment#create", as: "payment_create"
+  get "payment/success", to: "payment#success", as: "payment_success"
+  get "payment/cancel", to: "payment#cancel", as: "payment_cancel"
+  post "order/destroy/:id", to: "orders#destroy", as: "order_delete"
+  resources :orders, only: %i[show new create]
   # get "checkout", to: "checkout#index", as: "checkout"
 
   post "cart/:id", to: "cart#create", as: "cart_create"

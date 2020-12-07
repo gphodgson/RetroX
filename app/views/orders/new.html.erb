@@ -1,0 +1,66 @@
+<section class="hero is-info mb-5">
+  <div class="hero-body">
+    <div class=container>
+      <h1 class="title is-3">Address for Delivery</h1>
+    </div>
+  </div>
+</section>
+
+
+<%if logged_in? %>
+  <h1 class="title is-4">Choose one of your addresses</h1>
+  <div class="mb-5">
+    <%= form_with url: orders_path(1) do%>
+      <%=label :address_id, "Address"%>
+      <%=select_tag :address_id, options_from_collection_for_select(current_user.addresses, :id, :line1) %>
+      <%=submit_tag "Use this Address", class: "button is-primary"%>
+      <%=hidden_field_tag :type, "saved_address"%>
+    <%end%>
+  </div>
+  <h1 class="title is-4">Or</h1>
+<%end%>
+
+  <div>
+    <h1>Create new Address </h1>
+    <%= form_with url: orders_path(1) do%>
+    <p>
+      <%= label :line1, "Line 1:"%>
+      <%= text_field_tag :line1%>
+    </p>
+    <p>
+      <%= label :line2, "Line 2:"%>
+      <%= text_field_tag :line2%>
+    </p>
+    <p>
+      <%= label :city, "City:"%>
+      <%= text_field_tag :city%>
+    </p>
+    <p>
+      <%= label :state, "State:"%>
+      <%= text_field_tag :state%>
+    </p>
+    <p>
+      <%= label :country, "Country:"%>
+      <%= text_field_tag :country%>
+    </p>
+    <p>
+      <%= label :phone, "Phone:"%>
+      <%= text_field_tag :phone%>
+    </p>
+    <p>
+      <%= label :postalCode, "Postal Code:"%>
+      <%= text_field_tag :postalCode%>
+    </p>
+    <% if logged_in? %>
+      <p>
+        <%= label :save, "Save Address:"%>
+        <%= check_box_tag :save%>
+      </p>
+    <%end%>
+    <p>
+      <%= submit_tag "Use this address", class: "button is-primary" %>
+    </p>
+    <%= hidden_field_tag :type, "new_address"%>
+    <%end%>
+  </div>
+
