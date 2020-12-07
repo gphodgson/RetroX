@@ -1,0 +1,7 @@
+const stripe = Stripe("<%=Rails.configuration.stripe[:P_KEY]%>")
+
+stripe.redirectToCheckout({
+  sessionId: '<%= @session.id %>'
+}).then((result) => {
+  console.log(result.error.message)
+});

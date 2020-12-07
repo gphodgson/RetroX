@@ -28,7 +28,24 @@
   </tbody>
 </table>
 
-<%if @order.state = Order::NEW%>
+<table class="table is-fullwidth">
+  <thead>
+    <th>Sub-Total</th>
+    <th>GST</th>
+    <th>PST</th>
+    <th>Grand Total</th>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= number_to_currency @order.total_price %></td>
+      <td><%= number_to_currency @order.pst %></td>
+      <td><%= number_to_currency @order.gst %></td>
+      <td><%= number_to_currency @order.total_taxed_price %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%if @order.state == Order::NEW%>
 
   <section class="hero is-info mb-5">
     <div class="hero-body">
@@ -44,7 +61,12 @@
     </div>
   </section>
 
-<%elsif @order.state = Order::PROCESSING%>
+  <%=form_with url: payment_create_path do%>
+    <%= hidden_field_tag :id, @order.id %>
+    <%= button_tag 'Pay With Stripe 💳', class: "button is-info mr-5" %>
+  <%end%>
+
+<%elsif @order.state == Order::PROCESSING%>
 
   <section class="hero is-info mb-5">
     <div class="hero-body">
@@ -56,7 +78,7 @@
     </div>
   </section>
 
-<%elsif @order.state = Order::SHIPPED%>
+<%elsif @order.state == Order::SHIPPED%>
 
   <section class="hero is-info mb-5">
     <div class="hero-body">
@@ -68,7 +90,7 @@
     </div>
   </section>
 
-<%elsif @order.state = Order::DELIVERED%>
+<%elsif @order.state == Order::DELIVERED%>
 
   <section class="hero is-info mb-5">
     <div class="hero-body">
@@ -80,13 +102,13 @@
     </div>
   </section>
 
-<%elsif @order.state = Order::CANCELLED%>
+<%elsif @order.state == Order::CANCELLED%>
 
   <section class="hero is-info mb-5">
     <div class="hero-body">
       <div class=container>
         <div class="is-flex" style="justify-content: space-between">
-          <h1 class="title is-3">This Order was Cancelled</h1>
+          <h1 class="title is-3">This Order was</h1>
         </div>
       </div>
     </div>

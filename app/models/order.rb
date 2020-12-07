@@ -1,3 +1,6 @@
+require "net/http"
+require "json"
+
 #======================
 # Order
 #
@@ -26,6 +29,30 @@ class Order < ApplicationRecord
 
   def item_string
     "#{products.first.name}, and more..."
+  end
+
+  def tax_resource
+    tax_url = "https://api.salestaxapi.ca/v2/province/#{address.state}"
+    tax_uri = URI(tax_url)
+    JSON.parse(Net::HTTP.get(tax_uri))
+  end
+
+  def gst
+    tax_res = tax_resource
+
+    total_price * tax_res["gst"]
+  end
+
+  def pst
+    tax_res = tax_resource
+    total_price * tax_res["pst"]
+  end
+
+  def total_taxed_price
+    tax_res = tax_resource
+    gst = total_price * tax_res["gst"]
+    pst = total_price * tax_res["pst"]
+    total_price + gst + pst
   end
 
   validates :total_price, :state, presence: true

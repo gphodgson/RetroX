@@ -44,11 +44,21 @@ class OrdersController < ApplicationController
     new_order.total_price = total
     new_order.save
 
+    session["cart"]["items"] = []
+    session["cart"]["amount"] = 0
+
     redirect_to order_path(new_order.id)
   end
 
   def show
     @order = Order.find(params[:id])
+
+    if current_user.nil? && @order.user.id != 5
+      redirect_to root_path
+      return
+    end
+
+    redirect_to root_path if @order.user.id != current_user.id
   end
 
   def destroy
