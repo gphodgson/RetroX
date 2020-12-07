@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :orders, only: %i[show new create]
   # get "checkout", to: "checkout#index", as: "checkout"
 
   post "cart/:id", to: "cart#create", as: "cart_create"

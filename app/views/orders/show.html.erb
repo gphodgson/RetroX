@@ -1,0 +1,11 @@
+<section class="hero is-info mb-5">
+  <div class="hero-body">
+    <div class=container>
+      <h1 class="title is-3">My Order</h1>
+    </div>
+  </div>
+</section>
+
+<%@order.products.each do |product|%>
+  <p><%= product.name%></p>
+<%end%>

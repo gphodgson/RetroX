@@ -21,8 +21,8 @@ class Order < ApplicationRecord
   validates :total_price, :state, presence: true
   validates :total_price, numericality: true
 
-  has_one :address
-  belongs_to :user
+  belongs_to :user, optional: true
+  belongs_to :address
   has_many :ordered_items
   has_many :products, through: :ordered_items
 end

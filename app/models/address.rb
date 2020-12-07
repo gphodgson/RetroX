@@ -27,4 +27,5 @@ class Address < ApplicationRecord
   validates :state, inclusion: { in: ["AB", "BC", "MB", "NB", "NL", "NS", "ON", "PE", "QC", "SK"] }
 
   belongs_to :user, optional: true
+  has_many :orders
 end
