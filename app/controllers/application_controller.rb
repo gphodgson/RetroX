@@ -14,11 +14,11 @@ class ApplicationController < ActionController::Base
   end
 
   def init_session
-    session[:test] = "test"
     session[:cart] ||= {
-      "amount": 0,
-      "items":  []
+      "amount" => 0,
+      "items"  => []
     }
+    logger.debug("TEST: #{session[:cart]}")
   end
 
   def current_user

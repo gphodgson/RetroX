@@ -34,7 +34,6 @@ class CartController < ApplicationController
       else
         if item["amount"] <= 1
           destroy
-          return
         else
           item["amount"] -= 1
         end
