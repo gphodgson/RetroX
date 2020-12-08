@@ -45,24 +45,30 @@
 
           <div class="navbar-end">
             <div class="navbar-item">
-              <div class="navbar-item has-dropdown is-hoverable">
-                <a class="navbar-link" href="/checkout">
-                  Cart (<%= cart["amount"] %>)
-                </a>
-
-                <div class="navbar-dropdown">
-                  <%cart["items"].each do |item|%>
-                    <a class=navbar-item href="<%=product_path(item["id"])%>">
-                      <%=item["name"]%> | <%= number_to_currency item["price"]%> x <%= item["amount"]%>
-                    </a>
-
-                  <%end%>
-
-                  <a href="/checkout"  class="navbar-item button is-primary">
-                    Goto Checkout -->
+              <% if cart["amount"] > 0%>
+                <div class="navbar-item has-dropdown is-hoverable">
+                  <a class="navbar-link" href="/checkout">
+                    Cart (<%= cart["amount"] %>)
                   </a>
+
+                  <div class="navbar-dropdown">
+                    <%cart["items"].each do |item|%>
+                      <a class=navbar-item href="<%=product_path(item["id"])%>">
+                        <%=item["name"]%> | <%= number_to_currency item["price"]%> x <%= item["amount"]%>
+                      </a>
+
+                    <%end%>
+
+                    <a href="/checkout"  class="navbar-item button is-primary">
+                      Goto Checkout -->
+                    </a>
+                  </div>
                 </div>
-            </div>
+              <%else%>
+                <a class="navbar-link">
+                  Cart(0)
+                </a>
+              <%end%>
 
               <div class="buttons">
                 <%if !logged_in?%>
