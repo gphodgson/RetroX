@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :init_session
   helper_method :cart
   helper_method :cart_subtotal
+  helper_method :init_session
 
   private
 
