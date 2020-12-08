@@ -57,6 +57,7 @@ class Order < ApplicationRecord
 
   validates :total_price, :state, presence: true
   validates :total_price, numericality: true
+  validates :state, inclusion: { in: [NEW, SHIPPED, PROCESSING, DELIVERED, CANCELLED] }
 
   belongs_to :user, optional: true
   belongs_to :address

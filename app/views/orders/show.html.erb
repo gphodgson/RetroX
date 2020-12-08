@@ -18,7 +18,7 @@
   <tbody>
     <%@order.ordered_items.each do |item|%>
       <tr>
-        <td><%= image_tag item.product.image.variant(resize: "100x150!").processed %></td>
+        <td><%= image_tag item.product.image.variant(resize: "100x150!").processed, alt: item.product.name %></td>
         <td><%= item.product.name%></td>
         <td><%= item.amount%></td>
         <td><%= number_to_currency item.price%></td>
@@ -68,7 +68,7 @@
 
 <%elsif @order.state == Order::PROCESSING%>
 
-  <section class="hero is-info mb-5">
+  <section class="hero is-primary mb-5">
     <div class="hero-body">
       <div class=container>
         <div class="is-flex" style="justify-content: space-between">
@@ -80,7 +80,7 @@
 
 <%elsif @order.state == Order::SHIPPED%>
 
-  <section class="hero is-info mb-5">
+  <section class="hero is-primary mb-5">
     <div class="hero-body">
       <div class=container>
         <div class="is-flex" style="justify-content: space-between">
@@ -92,11 +92,11 @@
 
 <%elsif @order.state == Order::DELIVERED%>
 
-  <section class="hero is-info mb-5">
+  <section class="hero is-success mb-5">
     <div class="hero-body">
       <div class=container>
         <div class="is-flex" style="justify-content: space-between">
-          <h1 class="title is-3">Your Order is On Its Way!</h1>
+          <h1 class="title is-3">Your Order has Arrived!</h1>
         </div>
       </div>
     </div>
@@ -104,11 +104,11 @@
 
 <%elsif @order.state == Order::CANCELLED%>
 
-  <section class="hero is-info mb-5">
+  <section class="hero is-danger mb-5">
     <div class="hero-body">
       <div class=container>
         <div class="is-flex" style="justify-content: space-between">
-          <h1 class="title is-3">This Order was</h1>
+          <h1 class="title is-3">This Order was Cancelled.</h1>
         </div>
       </div>
     </div>
