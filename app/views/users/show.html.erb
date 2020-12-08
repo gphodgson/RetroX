@@ -8,17 +8,19 @@
 </section>
 
 <div class="is-flex pb-5 mb-5" style="justify-content:space-between; border-bottom: 1px dashed grey;">
-  <h1 class=button style="border:none" style="border: 1px solid black">My Orders: </h1>
+  <h1 class=button style="border:none" >My Orders: </h1>
 </div>
 
 <div class="mb-5">
   <table class="table is-fullwidth">
     <thead>
+    <tr>
       <th>Items</th>
       <th>Status</th>
       <th>Subtotal</th>
       <th>Date</th>
       <th></th>
+    </tr>
     </thead>
     <tbody>
       <% @user.orders.each do |order|%>
@@ -35,7 +37,7 @@
 </div>
 
 <div class="is-flex pb-5 mb-5" style="justify-content:space-between; border-bottom: 1px dashed grey;">
-  <h1 class=button style="border:none" style="border: 1px solid black">Saved Addresses: </h1>
+  <h1 class=button style="border:none" >Saved Addresses: </h1>
   <a class="button is-primary" href="<%= root_url %>addresses/new">
     Add Address
   </a>
