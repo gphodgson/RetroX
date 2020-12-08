@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
 
   def init_session
     session[:test] = "test"
-    session[:cart] ||= {
+    session[:cart] = {
       "amount": 0,
       "items":  []
     }
