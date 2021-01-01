@@ -38,7 +38,7 @@ class Product < ApplicationRecord
     if Rails.env.development?
       "julianday('now') - julianday(created_at) <= #{NEW_PRODUCT_THRESHOLD}"
     else
-      "DATEDIFF(day, current_timestamp, created_at) <= #{NEW_PRODUCT_THRESHOLD}"
+      "DATEDIFF('day', current_timestamp, created_at) <= #{NEW_PRODUCT_THRESHOLD}"
     end
   end
 
@@ -50,7 +50,7 @@ class Product < ApplicationRecord
     if Rails.env.development?
       "julianday('now') - julianday(created_at) <= #{RECENT_UPDATE_THRESHOLD} AND NOT (#{new_products_query})"
     else
-      "DATEDIFF(day, current_timestamp, updated_at) <= #{RECENT_UPDATE_THRESHOLD} AND NOT (#{new_products_query})"
+      "DATEDIFF('day', current_timestamp, updated_at) <= #{RECENT_UPDATE_THRESHOLD} AND NOT (#{new_products_query})"
     end
   end
 
