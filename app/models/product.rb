@@ -35,7 +35,11 @@ class Product < ApplicationRecord
   end
 
   def self.new_products_query
-    "julianday('now') - julianday(created_at) <= #{NEW_PRODUCT_THRESHOLD}"
+    if Rails.env.development?
+      "julianday('now') - julianday(created_at) <= #{NEW_PRODUCT_THRESHOLD}"
+    else
+      "current_timestamp - created_at <= #{NEW_PRODUCT_THRESHOLD}"
+    end
   end
 
   def self.recently_updated_products
@@ -43,7 +47,11 @@ class Product < ApplicationRecord
   end
 
   def self.recently_updated_products_query
-    "julianday('now') - julianday(created_at) <= #{RECENT_UPDATE_THRESHOLD} AND NOT (#{new_products_query})"
+    if Rails.env.development?
+      "julianday('now') - julianday(created_at) <= #{RECENT_UPDATE_THRESHOLD} AND NOT (#{new_products_query})"
+    else
+      "current_timestamp - updated_at <= #{RECENT_UPDATE_THRESHOLD} AND NOT (#{new_products_query})"
+    end
   end
 
   def self.generate_filter_url(params)

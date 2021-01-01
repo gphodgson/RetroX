@@ -9,11 +9,13 @@
 
 <table class="table is-fullwidth">
   <thead>
-    <th></th>
-    <th>Title</th>
-    <th>Amount</th>
-    <th>Price</th>
-    <th>Total Price</th>
+    <tr>
+      <th></th>
+      <th>Title</th>
+      <th>Amount</th>
+      <th>Price</th>
+      <th>Total Price</th>
+    </tr>
   </thead>
   <tbody>
     <%@order.ordered_items.each do |item|%>
@@ -30,10 +32,12 @@
 
 <table class="table is-fullwidth">
   <thead>
-    <th>Sub-Total</th>
-    <th>GST</th>
-    <th>PST</th>
-    <th>Grand Total</th>
+    <tr>
+      <th>Sub-Total</th>
+      <th>GST</th>
+      <th>PST</th>
+      <th>Grand Total</th>
+    </tr>
   </thead>
   <tbody>
     <tr>
